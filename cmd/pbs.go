@@ -38,7 +38,8 @@ user, then writes a peer config file for the peer to consume.`,
 			DatastoreName: cfg.ZFS.DatasetName,
 		}
 
-		if err := config.SetPeerConfig(cfg.PBS.PeerUsername, peerCfg); err != nil {
+		peerConfigPath := fmt.Sprintf("%s.yaml", cfg.PBS.PeerUsername)
+		if err := config.SetPeerConfig(peerConfigPath, peerCfg); err != nil {
 			return fmt.Errorf("writing peer config for %s: %w", cfg.PBS.PeerUsername, err)
 		}
 		return nil

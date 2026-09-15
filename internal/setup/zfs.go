@@ -10,7 +10,7 @@ import (
 // ZFS provisions the ZFS storage backing for PBS: an LVM logical volume on the
 // "pve" volume group, a zpool on top of it, and a dataset with the desired
 // properties.
-func ZFS(cfg config.ZFSConfig) error {
+func ZFS(cfg config.ZFSConfig, rmStaleChunks bool) error {
 	if err := zfs.EnsureLogicalVolume(cfg.LVsize, cfg.LVName); err != nil {
 		return fmt.Errorf("ensuring logical volume %s: %w", cfg.LVName, err)
 	}
@@ -24,6 +24,12 @@ func ZFS(cfg config.ZFSConfig) error {
 
 	if err := zfs.EnsureDataset(cfg.PoolName, cfg.DatasetName); err != nil {
 		return err
+	}
+
+	if rmStaleChunks {
+		if err := zfs.RemoveStaleChunks(cfg.PoolName, cfg.DatasetName); err != nil {
+			return err
+		}
 	}
 
 	if err := zfs.EnsureProperty(cfg.PoolName, cfg.DatasetName, "compression=lz4"); err != nil {

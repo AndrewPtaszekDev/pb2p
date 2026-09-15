@@ -144,7 +144,7 @@ func SetPeerConfig(peerConfigPath string, cfg PeerConfig) error {
 	maps.Copy(data, map[string]any{
 		"pbs_name":       cfg.PBSName,
 		"ip":             "",
-		"peer_username":  cfg.Username,
+		"username":       cfg.Username,
 		"token_secret":   cfg.TokenSecret,
 		"fingerprint":    cfg.Fingerprint,
 		"datastore_name": cfg.DatastoreName,

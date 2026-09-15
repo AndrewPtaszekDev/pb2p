@@ -52,7 +52,7 @@ type ContainerCreateSpec struct {
 }
 
 func createContainer(spec ContainerCreateSpec) error {
-	if err := DownloadTemplateIfNotExists(spec.TemplateStorage, spec.Template); err != nil {
+	if err := downloadTemplateIfNotExists(spec.TemplateStorage, spec.Template); err != nil {
 		return fmt.Errorf("ensuring template: %w", err)
 	}
 
