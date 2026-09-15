@@ -1,0 +1,41 @@
+# Binaries
+/pbs-setup
+/pb2p
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Dependency directories
+vendor/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# Environment and local config
+.env
+.env.*
+!.env.example
+config.yaml
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local notes and agent files
+.claude/
+.claude.json
+todo.txt

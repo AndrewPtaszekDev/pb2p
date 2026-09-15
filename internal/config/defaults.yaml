@@ -1,0 +1,20 @@
+--- # Generated default config
+pbs:
+  peer_username: # recommended: PEERFIRSTNAME
+container:
+  ctid: # choose an unused CTID e.g. 101
+  hostname: pbs
+  template: debian-12-standard_12.12-1_amd64.tar.zst
+  template_storage: local
+  container_storage: local-lvm
+  root_disk_gb: 8
+  cores: 1
+  memory_mb: 512
+  ip: # choose an IP e.g. 192.168.1.20/24
+  gateway: # set the gateway e.g. 192.168.1.1
+  password: # set a password
+zfs:
+  lvsize: 500G
+  lvname: zfs-store
+  pool_name: tank
+  dataset_name: # recommended: PEERLASTNAME-backups
