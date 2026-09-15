@@ -48,7 +48,7 @@ type PBSConfig struct {
 	PeerUsername string `yaml:"peer_username"`
 }
 
-// what the peer needs to give to its pbs-setup client --config /path/config.yaml
+// what the peer needs to give to its pb2p client --config /path/config.yaml
 type PeerConfig struct {
 	PBSName       string `yaml:"pbs_name"` // peer-pbs
 	IP            string `yaml:"ip"`
@@ -92,7 +92,7 @@ func CreateDefaultConfig() error {
 	// operation, so we never clobber a config that appeared in between.
 	err := writeFileAtomic(configFileName, defaultConfigData, 0644, true)
 	if errors.Is(err, fs.ErrExist) {
-		fmt.Printf("skipping, %s already exists...\n", configFileName)
+		fmt.Printf("%s already exists, skipping...\n", configFileName)
 		return nil
 	}
 

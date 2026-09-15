@@ -12,12 +12,12 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "pbs-setup",
+	Use:   "pb2p",
 	Short: "Set up Proxmox Backup Server between two peers",
-	Long: `pbs-setup automates a two-peer Proxmox Backup Server deployment.
+	Long: `pb2p automates a two-peer Proxmox Backup Server deployment.
 
-Each host runs pbs-setup server to provision a PBS instance, then shares
-its peer config with the other host, which runs pbs-setup peer to register
+Each host runs pb2p server to provision a PBS instance, then shares
+its peer config with the other host, which runs pb2p peer to register
 the PBS storage.`,
 	SilenceErrors: true,
 	SilenceUsage:  true,
@@ -35,7 +35,7 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.pbs-setup.yaml)")
+	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.pb2p.yaml)")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.

@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"pbs-setup/internal/config"
+	"pb2p/internal/config"
 
 	"github.com/spf13/cobra"
 )

@@ -3,7 +3,7 @@ package pve
 import (
 	"fmt"
 	"os"
-	"pbs-setup/internal/exec"
+	"pb2p/internal/exec"
 	"strings"
 )
 
@@ -14,6 +14,7 @@ func EnsurePBSStorage(pbsName, ip, username, tokenSecret, datastoreName, fingerp
 		"--password", tokenSecret,
 		"--datastore", datastoreName,
 		"--fingerprint", fingerprint,
+		"--encryption-key", "autogen",
 	)
 
 	if exec.IsAlreadyExists(err) {

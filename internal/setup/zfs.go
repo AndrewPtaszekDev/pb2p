@@ -3,8 +3,8 @@ package setup
 import (
 	"fmt"
 
-	"pbs-setup/internal/config"
-	"pbs-setup/internal/zfs"
+	"pb2p/internal/config"
+	"pb2p/internal/zfs"
 )
 
 // ZFS provisions the ZFS storage backing for PBS: an LVM logical volume on the

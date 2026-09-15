@@ -3,8 +3,8 @@ package setup
 import (
 	"fmt"
 
-	"pbs-setup/internal/config"
-	"pbs-setup/internal/pbs"
+	"pb2p/internal/config"
+	"pb2p/internal/pbs"
 )
 
 // PeerConfigSpec is the subset of a peer config that setup.PBS produces: the

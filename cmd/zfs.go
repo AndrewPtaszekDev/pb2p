@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"fmt"
-	"pbs-setup/internal/config"
-	"pbs-setup/internal/setup"
+	"pb2p/internal/config"
+	"pb2p/internal/setup"
 
 	"github.com/spf13/cobra"
 )
@@ -24,23 +24,19 @@ with the desired properties.`,
 			return fmt.Errorf("validating config: %w", err)
 		}
 
-		if err := setup.ZFS(cfg.ZFS); err != nil {
+		if err := setup.ZFS(cfg.ZFS, rmStaleChunks); err != nil {
 			return fmt.Errorf("setting up ZFS pool %s: %w", cfg.ZFS.PoolName, err)
 		}
 		return nil
 	},
 }
 
+var rmStaleChunks bool
+
 func init() {
 	rootCmd.AddCommand(zfsCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// zfsCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// zfsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	zfsCmd.Flags().BoolVar(&rmStaleChunks, "rm-stale-chunks", false,
+		"remove stale PBS chunk data left behind in the dataset by a previous PBS setup. "+
+			"Only use this when reusing an existing pool and you are okay with discarding its contents")
 }

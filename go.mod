@@ -1,4 +1,4 @@
-module pbs-setup
+module pb2p
 
 go 1.27.1
 

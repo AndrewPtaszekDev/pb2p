@@ -3,8 +3,8 @@ package setup
 import (
 	"fmt"
 
-	"pbs-setup/internal/config"
-	"pbs-setup/internal/pve"
+	"pb2p/internal/config"
+	"pb2p/internal/pve"
 )
 
 // Container provisions a container from cfg: it ensures the container exists

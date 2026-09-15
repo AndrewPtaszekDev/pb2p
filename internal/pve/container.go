@@ -2,7 +2,7 @@ package pve
 
 import (
 	"fmt"
-	"pbs-setup/internal/exec"
+	"pb2p/internal/exec"
 	"strconv"
 	"strings"
 )

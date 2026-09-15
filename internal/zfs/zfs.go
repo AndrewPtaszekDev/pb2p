@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strings"
 
-	"pbs-setup/internal/exec"
+	"pb2p/internal/exec"
 )
 
 // EnsureLogicalVolume creates the LVM logical volume on the "pve" volume group
@@ -62,6 +62,41 @@ func EnsureDataset(poolName, datasetName string) error {
 		return fmt.Errorf("creating dataset %s: %w", datasetPath, err)
 	}
 	return nil
+}
+
+// RemoveStaleChunks deletes the PBS chunk store data (and its bookkeeping
+// files) that a previous PBS install may have left behind in a dataset. It is
+// intended to be run only when the caller wants to reuse an existing pool and
+// is okay with discarding its prior contents.
+func RemoveStaleChunks(poolName, datasetName string) error {
+	datasetPath := fmt.Sprintf("/mnt/%s/%s", poolName, datasetName)
+
+	if !confirmDelete(datasetPath) {
+		return fmt.Errorf("aborted: refusing to delete contents of %s", datasetPath)
+	}
+
+	fmt.Printf("Removing stale PBS chunks from %s...\n", datasetPath)
+
+	if _, err := exec.Run("rm", "-rf",
+		datasetPath+"/.chunks",
+		datasetPath+"/.gc-status",
+		datasetPath+"/.lock",
+	); err != nil {
+		return fmt.Errorf("removing stale chunks from %s: %w", datasetPath, err)
+	}
+	return nil
+}
+
+// confirmDelete prompts the user on stdin and returns true only for an
+// explicit "y"/"yes" response.
+func confirmDelete(datasetPath string) bool {
+	fmt.Printf("This will delete the contents of dataset %s, including any backed-up data.\n", datasetPath)
+	fmt.Print("Are you sure you want to continue? [y/N]: ")
+
+	var answer string
+	fmt.Scanln(&answer)
+	answer = strings.ToLower(strings.TrimSpace(answer))
+	return answer == "y" || answer == "yes"
 }
 
 // EnsureProperty sets a single ZFS property (e.g. "compression=lz4") on the

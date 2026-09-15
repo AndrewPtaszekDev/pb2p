@@ -6,8 +6,8 @@ package pbs
 import (
 	"encoding/json"
 	"fmt"
-	"pbs-setup/internal/exec"
-	"pbs-setup/internal/pve"
+	"pb2p/internal/exec"
+	"pb2p/internal/pve"
 	"strings"
 )
 
@@ -144,6 +144,11 @@ func ensureDatastore(ctid int, datasetName, backingPath string) error {
 		backingPath,
 		"--gc-schedule", "daily",
 	); err != nil {
+		if strings.Contains(err.Error(), "EEXIST") || strings.Contains(err.Error(), ".chunks") {
+			return fmt.Errorf("%w\nThe backing path already contains data from a previous PBS setup. "+
+				"If you want to reuse this dataset and are okay with discarding its contents, "+
+				"re-run with: pb2p zfs --rm-stale-chunks", err)
+		}
 		return err
 	}
 	return nil

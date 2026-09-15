@@ -2,7 +2,7 @@ package pbs
 
 import (
 	"fmt"
-	"pbs-setup/internal/pve"
+	"pb2p/internal/pve"
 )
 
 const TokenName = "backup-access"
