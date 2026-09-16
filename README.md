@@ -56,7 +56,7 @@ Edit `config.yaml` and fill in the required values (see
 pb2p server
 ```
 
-`server` runs `config`, `zfs`, `container`, and `pbs` in order. Each step can
+`server` runs `zfs`, `container`, and `pbs` in order. Each step can
 also be run on its own.
 
 When it finishes, a peer config file named after `pbs.peer_username` is written
@@ -89,7 +89,7 @@ using `pvesm add pbs`.
 | `zfs`              | Create the LVM logical volume, zpool, and dataset (`compression=lz4`, `atime=off`). |
 | `container`        | Download the template if needed, create the container, attach the bind mount, and start it. |
 | `pbs`              | Install PBS in the container, create the datastore, jobs, user, token, and ACLs, then write the peer config. |
-| `server`           | Run `config`, `zfs`, `container`, and `pbs` in sequence.                    |
+| `server`           | Run `zfs`, `container`, and `pbs` in sequence.                    |
 | `peer <file>`      | Register a peer's PBS storage on this host from their peer config.          |
 
 ## Configuration
