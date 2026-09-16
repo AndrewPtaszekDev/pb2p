@@ -16,7 +16,7 @@ var serverCmd = &cobra.Command{
 
 Each step runs exactly as if it were invoked directly.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		subcommands := []string{"config", "zfs", "container", "pbs"}
+		subcommands := []string{"zfs", "container", "pbs"}
 		for _, name := range subcommands {
 			fmt.Printf("=== running %s ===\n", name)
 			if err := runSubcommand(cmd, name); err != nil {

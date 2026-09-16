@@ -18,7 +18,7 @@ user, then writes a peer config file for the peer to consume.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		cfg, err := config.GetConfig()
 		if err != nil {
-			return fmt.Errorf("loading config: %w", err)
+			return fmt.Errorf("loading config: %w\nRun pb2p config first", err)
 		}
 
 		if err := cfg.Validate(); err != nil {
